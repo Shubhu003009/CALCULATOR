@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+        a{
+            text-decoration: none;
+        }
+        ul{
+            list-style: none;
+        }
+        body{
+            width: 800px;
+            height: 100vh;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            background-image: linear-gradient( 109.6deg, rgba(156,252,248,1) 11.2%, rgba(110,123,251,1) 91.1% );
+        }
+        button{
+            width: 100%;
+            border-radius: 3px;
+            cursor: pointer;
+            background-color: #277dff;
+            color: white;
+            font-size: 20px;
+        }
+        button:hover{
+            background-color: #3d8bff;
+        }
+        input{
+            border-radius: 3px;
+            border: none;
+            outline: none;
+            background-color: #b7d4ff;
+            height: 35px;
+            padding: 10px;
+            font-size: 18px;    
+            margin-bottom: 10%;
+        }
+        table{
+            max-width: 500px;
+            border-radius: 3px;
+            padding: 20px;
+            background-color: #66a2fc;
+            box-shadow: 2px 2px 2px rgb(0, 42, 168);
+        }
+        </style>
+</head>
+<body>
+    
+    <h1>Calculator</h1>
+    <table>
+        <thead>
+            <tr>
+                <td colspan="7"><input readonly id="screen" type="text"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button>7</button></td>
+                <td><button>8</button></td>
+                <td><button>9</button></td>
+            </tr>
+            <tr>
+                <td><button>4</button></td>
+                <td><button>5</button></td>
+                <td><button>6</button></td>
+                <td colspan="2"><button>DEL</button></td>
+                <td colspan="2"><button>AC</button></td>
+            </tr>
+            <tr>
+                <td><button>1</button></td>
+                <td><button>2</button></td>
+                <td><button>3</button></td>
+                <td colspan="2"><button>+</button></td>
+                <td colspan="2"><button>-</button></td>
+            </tr>
+            <tr>
+                <td><button>0</button></td>
+                <td><button>.</button></td>
+                <td> <button>*</button></td>
+                <td colspan="2"><button>/</button></td>
+                <td colspan="2"><button>=</button></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<script>
+
+    let screen = document.getElementById("screen");
+    let allbuttons = document.querySelectorAll("button");
+    
+    allbuttons.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            let currentTarget = e.target.innerText
+            if(currentTarget === '=') screen.value = eval(screen.value)
+            if(currentTarget != "=" && currentTarget != "DEL") screen.value = screen.value + currentTarget
+            if(currentTarget == 'DEL') {
+                let currentTargetToArray =  Array.from(screen.value)
+                currentTargetToArray.pop()
+                let currentTargetToString =  currentTargetToArray.join('')
+                screen.value = currentTargetToString
+            }
+            if(currentTarget == 'AC') screen.value = ""
+        });
+    })
+
+</script>
+</html>
